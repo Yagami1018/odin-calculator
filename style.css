@@ -1,0 +1,115 @@
+body {
+    background-color: hsl(0, 0%, 20%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40dvh;
+}
+.container {
+    background-color: white;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    padding: 15px;
+    gap: 5px;
+    width: 275px;
+}
+.container button {
+    width: 47px;
+    margin: 3px;
+    font-size: 2rem;
+    font-family: monospace;
+    border-radius: 100%;
+    color: hsl(0, 0%, 35%);
+    border: none;
+    box-shadow: 0px 2px 2px black;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.inputs {
+    margin-top: 20px;
+    display: grid;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+.display {
+    font-family: monospace;
+    text-align: end;
+    margin-top: 10px;
+    font-size: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px black;
+    border: none;
+    background-color: hsl(0, 0%, 95%);
+}
+.display:focus {
+    outline: none;
+    border: 1px solid hsla(0, 0%, 0%, 0.3);
+}
+.numbers {
+    background-color: hsl(180, 100%, 45%);
+}
+.numbers:hover {
+    background-color: hsl(180, 100%, 40%);
+}
+.numbers:active {
+    background-color: hsl(180, 100%, 35%);
+}
+.operators {
+    background-color: hsl(162, 100%, 64%);
+}
+.operators:hover {
+    background-color: hsl(162, 100%, 44%);
+}
+.operators:active {
+    background-color: hsl(162, 100%, 39%);
+}
+#clearAll {
+    background-color: hsl(197, 100%, 50%);
+}
+#clearAll:hover {
+    background-color: hsl(197, 100%, 45%);
+}
+#clearAll:active {
+    background-color: hsl(197, 100%, 40%);
+}
+#backspace {
+    background-color: hsl(9, 100%, 60%);
+}
+#backspace:hover {
+    background-color: hsl(9, 100%, 45%);
+}
+#backspace:active {
+    background-color: hsl(9, 100%, 40%);
+}
+#calculate {
+    background-color: hsl(51, 94%, 47%);
+}
+#calculate:hover {
+    background-color: hsl(51, 94%, 42%);
+}
+#calculate:active {
+    background-color: hsl(51, 94%, 37%);
+}
+#parenthesisOp,
+#parenthesisClos {
+    background-color: hsl(59, 98%, 49%);
+}
+#parenthesisOp:hover,
+#parenthesisClos:hover {
+    background-color: hsl(59, 98%, 45%);
+}
+#parenthesisOp:active,
+#parenthesisClos:active {
+    background-color: hsl(59, 98%, 39%);
+}
+#dot {
+    background-color: hsl(210, 77%, 79%);
+}
+#dot:hover {
+    background-color: hsl(210, 77%, 74%);
+}
+#dot:active {
+    background-color: hsl(210, 77%, 69%);
+}
