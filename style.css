@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40dvh;
+    height: 60dvh;
 }
 .container {
     background-color: white;
@@ -14,6 +14,7 @@ body {
     padding: 15px;
     gap: 5px;
     width: 275px;
+    height: 362px;
 }
 .container button {
     width: 47px;
@@ -112,4 +113,10 @@ body {
 }
 #dot:active {
     background-color: hsl(210, 77%, 69%);
+}
+#errMessages {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0;
+    color: red;
 }

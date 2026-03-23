@@ -1,20 +1,49 @@
 const buttons = document.querySelectorAll('button');
 const display = document.getElementById('display');
 const clearAll = document.getElementById('clearAll');
+const errMsgs = document.getElementById('errMessages');
 
 const displayInput = value => {
-    console.log(display.value);
-    console.log(value);
-
-    if (display.value == 0) {
+    if (String(display.value).includes('.')) {
+        display.value += value;
+    } else if (display.value == 0) {
         display.value = value;
     } else {
         display.value += value;
     }
 };
+const calculate = () => {
+    const indexOfOperator = String(display.value).search(/[+\-/*]/);
+    const operator = String(display.value).charAt(indexOfOperator);
+    const size = String(display.value).length;
+    const beforeOperator = String(display.value).slice(0, indexOfOperator);
+    const afterOperator = String(display.value).slice(indexOfOperator + 1, size + 1);
+    switch (operator) {
+        case '+':
+            display.value = Number(beforeOperator) + Number(afterOperator);
+            break;
+        case '-':
+            display.value = Number(beforeOperator) - Number(afterOperator);
+            break;
+        case '*':
+            display.value = Number(beforeOperator) * Number(afterOperator);
+            break;
+        case '/':
+            if (Number(afterOperator) == 0) {
+                display.value = 0;
+                errMsgs.textContent = 'Error: Division by 0 not possible';
+            } else {
+                display.value = Number(beforeOperator) / Number(afterOperator);
+            }
+    }
+
+    console.log(Number(beforeOperator));
+    console.log(Number(afterOperator));
+};
 
 buttons.forEach(btn =>
     btn.addEventListener('click', () => {
+        errMsgs.textContent = '';
         if (Number.isInteger(Number.parseInt(btn.value))) {
             displayInput(btn.value);
         } else if (btn.value === 'CA') {
@@ -26,9 +55,21 @@ buttons.forEach(btn =>
                 display.value = 0;
             }
         } else if (btn.value === '.') {
-            if (!String(display.value).includes(".")) {
-                display.value += "."
+            const text = String(display.value);
+            const indexOp = text.search(/[+\-/*]/);
+            const currentNumber = indexOp === -1 ? text : text.slice(indexOp + 1);
+            if (!currentNumber.includes('.')) {
+                display.value += '.';
             }
+        } else if (btn.value == '+' || btn.value == '-' || btn.value == '*' || btn.value == '/') {
+            if (!String(display.value).match(/[+\-/*]/)) {
+                display.value += btn.value;
+            } else if (!String(display.value).match(/[+\-/*]$/)) {
+                calculate();
+                display.value += btn.value;
+            }
+        } else if (btn.value == '=') {
+            calculate();
         }
     }),
 );
