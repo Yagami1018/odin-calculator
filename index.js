@@ -33,7 +33,8 @@ const calculate = () => {
                 display.value = 0;
                 errMsgs.textContent = 'Error: Division by 0 not possible';
             } else {
-                display.value = Number(beforeOperator) / Number(afterOperator);
+                const result = Number(beforeOperator) / Number(afterOperator);
+                display.value = Number.isInteger(result) ? result : result.toFixed(2);
             }
     }
 
