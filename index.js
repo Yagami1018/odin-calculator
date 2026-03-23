@@ -40,6 +40,35 @@ const calculate = () => {
     console.log(Number(beforeOperator));
     console.log(Number(afterOperator));
 };
+const backspace = () => {
+    if (String(display.value).length > 1) {
+        display.value = String(display.value).slice(0, -1);
+    } else {
+        display.value = 0;
+    }
+};
+const handleDots = () => {
+    const text = String(display.value);
+    const indexOp = text.search(/[+\-/*]/);
+    const currentNumber = indexOp === -1 ? text : text.slice(indexOp + 1);
+    const len = currentNumber.length;
+    console.log(len);
+
+    if (currentNumber.length == 0) {
+        display.value += 0;
+    }
+    if (!currentNumber.includes('.')) {
+        display.value += '.';
+    }
+};
+const handleOperators = btn => {
+    if (!String(display.value).match(/[+\-/*]/)) {
+        display.value += btn.value;
+    } else if (!String(display.value).match(/[+\-/*]$/)) {
+        calculate();
+        display.value += btn.value;
+    }
+};
 
 buttons.forEach(btn =>
     btn.addEventListener('click', () => {
@@ -49,25 +78,11 @@ buttons.forEach(btn =>
         } else if (btn.value === 'CA') {
             display.value = 0;
         } else if (btn.value === 'X') {
-            if (String(display.value).length > 1) {
-                display.value = String(display.value).slice(0, -1);
-            } else {
-                display.value = 0;
-            }
+            backspace();
         } else if (btn.value === '.') {
-            const text = String(display.value);
-            const indexOp = text.search(/[+\-/*]/);
-            const currentNumber = indexOp === -1 ? text : text.slice(indexOp + 1);
-            if (!currentNumber.includes('.')) {
-                display.value += '.';
-            }
+            handleDots();
         } else if (btn.value == '+' || btn.value == '-' || btn.value == '*' || btn.value == '/') {
-            if (!String(display.value).match(/[+\-/*]/)) {
-                display.value += btn.value;
-            } else if (!String(display.value).match(/[+\-/*]$/)) {
-                calculate();
-                display.value += btn.value;
-            }
+            handleOperators(btn);
         } else if (btn.value == '=') {
             calculate();
         }
