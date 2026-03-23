@@ -25,6 +25,10 @@ buttons.forEach(btn =>
             } else {
                 display.value = 0;
             }
+        } else if (btn.value === '.') {
+            if (!String(display.value).includes(".")) {
+                display.value += "."
+            }
         }
     }),
 );
