@@ -2,9 +2,13 @@ const buttons = document.querySelectorAll('button');
 const display = document.getElementById('display');
 const clearAll = document.getElementById('clearAll');
 const errMsgs = document.getElementById('errMessages');
+let isCalcResult = false;
 
 const displayInput = value => {
-    if (String(display.value).includes('.')) {
+    if (isCalcResult) {
+        display.value = value;
+        isCalcResult = false;
+    } else if (String(display.value).includes('.')) {
         display.value += value;
     } else if (display.value == 0) {
         display.value = value;
@@ -37,9 +41,6 @@ const calculate = () => {
                 display.value = Number.isInteger(result) ? result : result.toFixed(2);
             }
     }
-
-    console.log(Number(beforeOperator));
-    console.log(Number(afterOperator));
 };
 const backspace = () => {
     if (String(display.value).length > 1) {
@@ -86,6 +87,7 @@ buttons.forEach(btn =>
             handleOperators(btn);
         } else if (btn.value == '=') {
             calculate();
+            isCalcResult = true;
         }
     }),
 );
