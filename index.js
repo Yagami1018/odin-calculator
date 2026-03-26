@@ -17,11 +17,21 @@ const displayInput = value => {
     }
 };
 const calculate = () => {
-    const indexOfOperator = String(display.value).search(/[+\-/*]/);
-    const operator = String(display.value).charAt(indexOfOperator);
-    const size = String(display.value).length;
-    const beforeOperator = String(display.value).slice(0, indexOfOperator);
-    const afterOperator = String(display.value).slice(indexOfOperator + 1, size + 1);
+    let value = String(display.value);
+    let indexOfOperator = value.search(/[+\-/*]/);
+    let beforeOperator = value.slice(0, indexOfOperator);
+    const size = value.length;
+    if (indexOfOperator == 0) {
+        value = value.slice(1);
+        indexOfOperator = value.search(/[+\-/*]/);
+        beforeOperator = -Number(value.slice(0, indexOfOperator));
+    }
+    console.log(indexOfOperator);
+
+    const operator = value.charAt(indexOfOperator);
+    console.log(beforeOperator);
+
+    const afterOperator = value.slice(indexOfOperator + 1, size + 1);
     switch (operator) {
         case '+':
             display.value = Number(beforeOperator) + Number(afterOperator);
@@ -64,8 +74,15 @@ const handleDots = () => {
     }
 };
 const handleOperators = btn => {
-    if (!String(display.value).match(/[+\-/*]/)) {
-        display.value += btn.value;
+    const val = String(display.value);
+
+    if (btn.value === '-' && val.match(/[+*\-/]$/)) {
+        display.value += '-';
+        return;
+    }
+
+    if (!val.match(/[+\-/*]/)) {
+        display.value = (val === '0' ? '' : val) + btn.value;
     } else if (!String(display.value).match(/[+\-/*]$/)) {
         calculate();
         display.value += btn.value;
